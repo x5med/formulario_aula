@@ -50,7 +50,7 @@ export async function sendToMetrics(lead: Lead) {
       utm_campaign: lead.utmCampaign,
       ref: lead.referrer,
       status: "Lead In",
-      notes: "Lead captado na aula gratuita Sucesso do Cliente da EscalaMed.",
+      notes: "Solicitou acesso à aula gratuita Sucesso do Cliente na Clínica. Equipe comercial deve entrar em contato pelo WhatsApp informado para encaminhar a aula.",
     }),
     cache: "no-store",
     signal: AbortSignal.timeout(10000),

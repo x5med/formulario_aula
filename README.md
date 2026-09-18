@@ -1,6 +1,6 @@
 # Formulário da aula EscalaMed
 
-Landing page para a aula gratuita [Sucesso do Cliente na Clínica](https://youtu.be/BMQbF3xvaWo?si=OSA9pjvnOkzXBaV8). O visitante informa nome, e-mail, WhatsApp e Instagram; a aula é exibida imediatamente enquanto o cadastro é enviado ao funil `funil_ganchos` do Metrics em segundo plano.
+Landing page para solicitar a aula gratuita Sucesso do Cliente na Clínica. O visitante informa nome, e-mail, WhatsApp e Instagram; em seguida, vê a confirmação do pedido enquanto o cadastro é enviado ao funil `funil_ganchos` do Metrics em segundo plano. A equipe comercial entra em contato pelo WhatsApp informado para encaminhar o acesso à aula.
 
 ## Desenvolvimento
 
@@ -20,4 +20,4 @@ npm run typecheck
 npm run build
 ```
 
-A chave do Metrics fica somente no servidor. Se o envio falhar, a aula continua disponível e o visitante pode tentar registrar o acesso novamente.
+A chave do Metrics fica somente no servidor. Se o cadastro falhar, a tela informa o erro e permite tentar novamente.
