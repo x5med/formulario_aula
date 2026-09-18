@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, type FormEvent } from "react";
+import { WHATSAPP_MARKETING_CONSENT_TEXT } from "@/lib/consent";
 
 type SyncState = "idle" | "sending" | "registered" | "registration_failed";
 type Lead = {
@@ -14,6 +15,9 @@ type Lead = {
   utmMedium: string;
   utmCampaign: string;
   referrer: string;
+  pageUrl: string;
+  formSubmissionId: string;
+  whatsappConsent: boolean;
 };
 
 function normalizeInstagram(value: string) {
@@ -36,6 +40,7 @@ export function LeadExperience() {
   const [phone, setPhone] = useState("");
   const [instagram, setInstagram] = useState("");
   const [website, setWebsite] = useState("");
+  const [whatsappConsent, setWhatsappConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [syncState, setSyncState] = useState<SyncState>("idle");
   const [pendingLead, setPendingLead] = useState<Lead | null>(null);
@@ -68,7 +73,7 @@ export function LeadExperience() {
       setFormError("Revise nome, e-mail, WhatsApp com DDD e Instagram.");
       return;
     }
-    const lead = { name: name.trim(), email: email.trim(), phone: digits, instagram: handle, website, ...attribution() };
+    const lead = { name: name.trim(), email: email.trim(), phone: digits, instagram: handle, website, whatsappConsent, formSubmissionId: crypto.randomUUID(), pageUrl: window.location.href, ...attribution() };
     setPendingLead(lead);
     setSubmitted(true);
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -127,6 +132,7 @@ export function LeadExperience() {
             </div>
             <label className="honeypot" aria-hidden="true">Website<input type="text" name="website" tabIndex={-1} autoComplete="off" value={website} onChange={e => setWebsite(e.target.value)} /></label>
             {formError && <p className="form-error" role="alert">{formError}</p>}
+            <div className="consent-block"><input id="whatsapp-consent" name="whatsappConsent" type="checkbox" checked={whatsappConsent} onChange={e => setWhatsappConsent(e.target.checked)} /><div><label htmlFor="whatsapp-consent">{WHATSAPP_MARKETING_CONSENT_TEXT}</label><a href="https://metrics.x5med.com.br/politica-de-privacidade" target="_blank" rel="noopener noreferrer">Política de Privacidade ↗</a></div></div>
             <button className="primary-button" type="submit"><span>SOLICITAR AULA PELO WHATSAPP</span><span className="button-arrow" aria-hidden="true">↗</span></button>
           </form>}
           <p className="data-footnote">Seus dados serão registrados pela EscalaMed para que a equipe comercial entre em contato sobre a aula solicitada. <a href="https://metrics.x5med.com.br/politica-de-privacidade" target="_blank" rel="noopener noreferrer">Política de Privacidade ↗</a></p>

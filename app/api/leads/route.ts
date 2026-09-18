@@ -24,8 +24,11 @@ export async function POST(request: Request) {
     utmMedium: text(body.utmMedium, 120) || "site",
     utmCampaign: text(body.utmCampaign, 160) || "aula_sucesso_cliente",
     referrer: text(body.referrer, 500),
+    pageUrl: text(body.pageUrl, 500),
+    formSubmissionId: text(body.formSubmissionId, 36),
+    whatsappConsent: body.whatsappConsent === true,
   };
-  if (lead.name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email) || lead.phone.length < 10 || lead.phone.length > 13 || !/^[A-Za-z0-9._]{1,30}$/.test(lead.instagram)) {
+  if (lead.name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email) || lead.phone.length < 10 || lead.phone.length > 13 || !/^[A-Za-z0-9._]{1,30}$/.test(lead.instagram) || typeof body.whatsappConsent !== "boolean" || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(lead.formSubmissionId) || !/^https?:\/\//i.test(lead.pageUrl)) {
     return NextResponse.json({ error: "Revise nome, e-mail, WhatsApp e Instagram." }, { status: 400 });
   }
 

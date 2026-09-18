@@ -35,3 +35,4 @@
 .data-footnote a{color:var(--navy);font-weight:700}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:760px){.success-panel{padding:50px 0 36px}}
+.consent-block{display:flex;align-items:flex-start;gap:12px;margin-top:23px;padding:16px;border:1px solid #d8e2e9;border-radius:7px;background:#f7fafc;color:var(--ink);font-size:12px;line-height:1.55}.consent-block input{flex:none;width:18px;height:18px;margin:2px 0 0;accent-color:var(--navy);cursor:pointer}.consent-block label{cursor:pointer}.consent-block a{display:block;width:fit-content;margin-top:7px;color:var(--navy);font-weight:700}.consent-block input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}

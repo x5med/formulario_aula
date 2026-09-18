@@ -1,3 +1,5 @@
+import { WHATSAPP_MARKETING_CONSENT_TEXT } from "@/lib/consent";
+
 const METRICS_BASE_URL = (process.env.METRICS_BASE_URL || "https://metrics.x5med.com.br").replace(/\/$/, "");
 const FUNNEL_NAME = "funil_ganchos";
 let cachedFunnel: { id: string; until: number } | null = null;
@@ -11,6 +13,9 @@ export type Lead = {
   utmMedium: string;
   utmCampaign: string;
   referrer: string;
+  pageUrl: string;
+  formSubmissionId: string;
+  whatsappConsent: boolean;
 };
 
 async function getFunnelId(key: string) {
@@ -51,6 +56,11 @@ export async function sendToMetrics(lead: Lead) {
       ref: lead.referrer,
       status: "Lead In",
       notes: "Solicitou acesso à aula gratuita Sucesso do Cliente na Clínica. Equipe comercial deve entrar em contato pelo WhatsApp informado para encaminhar a aula.",
+      page_url: lead.pageUrl,
+      form_submission_id: lead.formSubmissionId,
+      whatsapp_consent: lead.whatsappConsent,
+      consent_source: "landing_page_aula_sucesso_cliente",
+      consent_text: WHATSAPP_MARKETING_CONSENT_TEXT,
     }),
     cache: "no-store",
     signal: AbortSignal.timeout(10000),
